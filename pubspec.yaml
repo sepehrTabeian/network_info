@@ -1,0 +1,36 @@
+name: network_info
+description: A standalone Flutter package for retrieving network information (public and local IP addresses)
+version: 1.0.0
+author: Sepehr Tabeian
+homepage: https://github.com/sepehr-tabeian/network_info
+repository: https://github.com/sepehr-tabeian/network_info
+issue_tracker: https://github.com/sepehr-tabeian/network_info/issues
+publish_to: 'none'
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Dependency injection
+  get_it: ^8.2.0
+  
+  # HTTP client for public IP retrieval
+  http: ^1.2.0
+  
+  # For connectivity checking
+  connectivity_plus: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+  # Testing utilities
+  mockito: ^5.4.4
+  build_runner: ^2.4.13
+  test: ^1.25.8
+  
+  # Linting
+  flutter_lints: ^5.0.0
