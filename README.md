@@ -65,21 +65,26 @@ Future<void> getNetworkInfo() async {
 
 ## Architecture
 
-This package follows Clean Architecture principles:
+This package follows Clean Architecture and SOLID principles with clear separation of concerns:
 
 ```
 lib/
 ├── src/
-│   ├── domain/              # Business logic layer
+│   ├── domain/              # Business logic layer (pure Dart)
 │   │   ├── models/
 │   │   │   └── network_info_model.dart
-│   │   └── repository/
-│   │       └── i_network_info_repository.dart
+│   │   ├── repository/
+│   │   │   └── i_network_info_repository.dart
+│   │   └── exceptions/
+│   │       └── network_info_exception.dart
 │   │
-│   ├── data/                # Data layer
+│   ├── data/                # Data layer (implementation)
+│   │   ├── config/
+│   │   │   └── network_info_config.dart
 │   │   ├── data_sources/
+│   │   │   ├── public_ip_data_source.dart
 │   │   │   ├── local_ip_data_source.dart
-│   │   │   └── public_ip_data_source.dart
+│   │   │   └── connectivity_data_source.dart
 │   │   └── repository/
 │   │       └── network_info_repository_impl.dart
 │   │
@@ -88,6 +93,43 @@ lib/
 │
 └── network_info.dart        # Public API
 ```
+
+### SOLID Principles Applied
+
+- **Single Responsibility**: Each class has one clear responsibility
+- **Open/Closed**: Easy to extend without modifying existing code
+- **Liskov Substitution**: All implementations can be substituted with their interfaces
+- **Interface Segregation**: Focused interfaces with only necessary methods
+- **Dependency Inversion**: High-level modules depend on abstractions
+
+### Design Patterns Used
+
+- **Repository Pattern**: Abstracts data source details
+- **Dependency Injection**: For better testability and flexibility
+- **Strategy Pattern**: Multiple implementations for different scenarios
+
+## Comparison with Other Packages
+
+| Feature | This Package | network_info_plus | connectivity_plus |
+|---------|--------------|------------------|-------------------|
+| Public IP | ✅ Multiple services | ❌ | ❌ |
+| Local IP | ✅ | ✅ | ❌ |
+| Connectivity | ✅ | ❌ | ✅ |
+| Clean Architecture | ✅ | ❌ | ❌ |
+| DI Support | ✅ GetIt | ❌ | ❌ |
+| Testability | ✅ Full mocking | ⚠️ Limited | ⚠️ Limited |
+| SOLID Principles | ✅ | ❌ | ❌ |
+| Retry Logic | ✅ Configurable | ❌ | ❌ |
+| Fallback Services | ✅ Multiple | ❌ | ❌ |
+
+## Future Enhancements
+
+- IPv6 Support: Add IPv6 address retrieval
+- Caching: Add configurable caching for public IP
+- Network Speed: Add network speed testing
+- VPN Detection: Detect if VPN is active
+- Proxy Detection: Detect proxy usage
+- Network Type: Detailed network type (2G/3G/4G/5G)
 
 ## Advanced Usage
 
