@@ -2,14 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] - 2025-10-23
+
+### Added - Simplified API
+- **NetworkInfo**: New simplified API with clean interface
+  - Static methods for simple, direct access: `NetworkInfo.getPublicIp()`
+  - Instance methods for advanced scenarios
+  - Automatic initialization - no manual DI setup required
+  - Hides internal complexity (GetIt, repositories, data sources)
+  - Custom configuration support
+  
+### Changed
+- **Primary API**: `NetworkInfo` is now the recommended way to use the package
+- **Documentation**: Updated with simplified API examples
+- **Examples**: Refactored to demonstrate simplified API
+  - `example/main.dart`: Updated to use NetworkInfo
+  - `example/network_info_example.dart`: Comprehensive examples
+  
+### Enhanced
+- **Better Developer Experience**:
+  - No manual DI initialization needed (auto-initializes)
+  - Simpler API: `NetworkInfo.getPublicIp()` vs `GetIt.instance<INetworkInfoRepository>()`
+  - Less boilerplate code
+  - Clearer intent and usage
+  
+### Maintained
+- **Backward Compatibility**: All existing APIs remain available
+  - `NetworkInfoDI` still works for manual DI setup
+  - `INetworkInfoRepository` still accessible for advanced use
+  - All data sources remain unchanged
+  - No breaking changes to existing code
+
+### Testing
+- Added comprehensive tests for simplified API
+- 100% test coverage for new NetworkInfo implementation
+- All existing tests remain passing
+
+### Design Patterns
+- **Facade Pattern**: Simplified interface hiding system complexity
+- Repository Pattern (maintained)
+- Dependency Injection Pattern (maintained)
+- Strategy Pattern (maintained)
+- Singleton Pattern (maintained)
+
+### Migration Guide
+**Old Way (still works):**
+```dart
+NetworkInfoDI.setupNetworkInfoDI();
+final repo = GetIt.instance<INetworkInfoRepository>();
+final publicIp = await repo.getPublicIp();
+```
+
+**New Way (recommended):**
+```dart
+// No setup needed!
+final publicIp = await NetworkInfo.getPublicIp();
+```
+
 ## [1.0.2] - 2025-10-23
 
 ### Fixed
 - Fixed an issue with the library directive and exports in `network_info.dart`
 - Removed direct dependency on `network_info_di.dart` from the main library file
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.1] - 2025-01-24
 
