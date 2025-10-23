@@ -4,6 +4,7 @@
 /// Author: Sepehr Tabeian
 /// License: MIT
 /// Copyright (c) 2025 Sepehr Tabeian
+library;
 
 // Dependency injection
 import 'package:network_info/src/di/network_info_di.dart';
