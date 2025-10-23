@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 // Import all test files
 import 'data/data_sources/public_ip_data_source_test.dart' as public_ip_test;
-import 'di/network_info_di_test.dart' as di_test;
 import 'domain/models/network_info_model_test.dart' as model_test;
 
 void main() {
@@ -15,8 +14,5 @@ void main() {
       public_ip_test.main();
     });
 
-    group('Dependency Injection', () {
-      di_test.main();
-    });
   });
 }

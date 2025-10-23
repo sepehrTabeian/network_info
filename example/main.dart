@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:network_info/network_info.dart';
+import 'package:network_info/src/di/network_info_di.dart';
+import 'package:network_info/src/domain/repository/i_network_info_repository.dart';
 
 void main() {
   // Initialize the package
