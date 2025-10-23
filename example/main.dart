@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:network_info/network_info.dart';
-import 'package:network_info/src/di/network_info_di.dart';
-import 'package:network_info/src/domain/repository/i_network_info_repository.dart';
 
 void main() {
-  // Initialize the package
-  NetworkInfoDI.setupNetworkInfoDI();
+  // No initialization needed! NetworkInfo auto-initializes
+  // But you can customize if needed:
+  // NetworkInfo.initialize(
+  //   config: NetworkInfoConfig(
+  //     timeout: Duration(seconds: 10),
+  //     retryCount: 5,
+  //   ),
+  // );
 
   runApp(const MyApp());
 }
@@ -35,8 +38,6 @@ class NetworkInfoScreen extends StatefulWidget {
 }
 
 class _NetworkInfoScreenState extends State<NetworkInfoScreen> {
-  final _networkInfo = GetIt.instance<INetworkInfoRepository>();
-
   String? _publicIp;
   String? _localIp;
   bool _isConnected = false;
@@ -52,7 +53,9 @@ class _NetworkInfoScreenState extends State<NetworkInfoScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final info = await _networkInfo.getNetworkInfo();
+      // Simple and clean API!
+      // No need to manage DI or repositories manually
+      final info = await NetworkInfo.getNetworkInfo();
 
       setState(() {
         _publicIp = info.publicIp;
